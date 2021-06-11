@@ -438,6 +438,13 @@ storage.child("images/example.jpg").get_url()
 # https://firebasestorage.googleapis.com/v0/b/storage-url.appspot.com/o/images%2Fexample.jpg?alt=media
 ```
 
+### delete
+
+The delete method takes the path to the saved database file and user token.
+```
+storage.delete("images/example.jpg",user["idToken"])
+```
+
 ### Helper Methods
 
 #### generate_key
