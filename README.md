@@ -431,10 +431,10 @@ storage.child("images/example.jpg").download("downloaded.jpg")
 
 ### get_url
 
-The get_url method takes the path to the saved database file and returns the storage url.
+The get_url method takes the path to the saved database file and user token which returns the storage url.
 
 ```
-storage.child("images/example.jpg").get_url()
+storage.child("images/example.jpg").get_url(user["idToken"])
 # https://firebasestorage.googleapis.com/v0/b/storage-url.appspot.com/o/images%2Fexample.jpg?alt=media
 ```
 
