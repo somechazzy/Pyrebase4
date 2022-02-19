@@ -184,7 +184,7 @@ class Auth:
         """
         https://firebase.google.com/docs/reference/rest/auth#section-update-profile
         """
-        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/updateAccount?key={0}".format(self.api_key)
+        request_ref = "https://identitytoolkit.googleapis.com/v1/accounts:update?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"idToken": id_token, "displayName": display_name, "photoURL": photo_url, "deleteAttribute": delete_attribute, "returnSecureToken": True})
         request_object = requests.post(request_ref, headers=headers, data=data)
