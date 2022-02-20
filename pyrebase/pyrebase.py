@@ -179,6 +179,17 @@ class Auth:
         request_object = requests.post(request_ref, headers=headers, data=data)
         raise_detailed_error(request_object)
         return request_object.json()
+    
+    def update_profile(self, id_token, display_name = None, photo_url = None, delete_attribute = None):
+        """
+        https://firebase.google.com/docs/reference/rest/auth#section-update-profile
+        """
+        request_ref = "https://identitytoolkit.googleapis.com/v1/accounts:update?key={0}".format(self.api_key)
+        headers = {"content-type": "application/json; charset=UTF-8"}
+        data = json.dumps({"idToken": id_token, "displayName": display_name, "photoURL": photo_url, "deleteAttribute": delete_attribute, "returnSecureToken": True})
+        request_object = requests.post(request_ref, headers=headers, data=data)
+        raise_detailed_error(request_object)
+        return request_object.json()
 
 
 class Database:

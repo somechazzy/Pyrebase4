@@ -79,6 +79,12 @@ user = auth.sign_in_with_email_and_password(email, password)
 # Log the user in anonymously
 user = auth.sign_in_anonymous()
 
+# Add user info
+user = auth.update_profile(display_name, photo_url, delete_attribute)
+
+# Get user info
+user = auth.get_account_info()
+
 # Get a reference to the database service
 db = firebase.database()
 
