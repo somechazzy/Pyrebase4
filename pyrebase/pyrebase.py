@@ -18,6 +18,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from gcloud import storage
 from requests.packages.urllib3.contrib.appengine import is_appengine_sandbox
 from requests_toolbelt.adapters import appengine
+from uuid import uuid4
 
 import python_jwt as jwt
 from Crypto.PublicKey import RSA
@@ -454,7 +455,7 @@ class Storage:
             self.path = new_path
         return self
 
-    def put(self, file, token=None):
+    def put(self, file, token=None, content_type=None):
         # reset path
         path = self.path
         self.path = None
@@ -470,10 +471,17 @@ class Storage:
             return request_object.json()
         elif self.credentials:
             blob = self.bucket.blob(path)
+
+            # Add metadata to enable file previews in console
+            blob.metadata = {"firebaseStorageDownloadTokens": str(uuid4())}
             if isinstance(file, str):
                 return blob.upload_from_filename(filename=file)
             else:
-                return blob.upload_from_file(file_obj=file)
+                # If the file is not a string we need to patch the blob after upload to set the content type
+                blob.upload_from_string(file)
+                if content_type:
+                    blob.content_type = content_type
+                blob.patch()
         else:
             request_object = self.requests.post(request_ref, data=file_object)
             raise_detailed_error(request_object)
