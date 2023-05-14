@@ -4,7 +4,7 @@ A simple python wrapper for the [Firebase API](https://firebase.google.com).
 
 ## Installation
 
-```python
+```shell
 pip install pyrebase4
 ```
 
