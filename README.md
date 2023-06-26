@@ -296,7 +296,7 @@ Returns a list of objects on each of which you can call ```val()``` and ```key()
 all_users = db.child("users").get()
 for user in all_users.each():
     print(user.key()) # Morty
-    print(user.val()) # {name": "Mortimer 'Morty' Smith"}
+    print(user.val()) # {"name": "Mortimer 'Morty' Smith"}
 ```
 
 #### get
