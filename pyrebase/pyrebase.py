@@ -53,7 +53,7 @@ class Firebase:
             # ProtocolError('Connection aborted.', error(13, 'Permission denied'))
             adapter = appengine.AppEngineAdapter(max_retries=3)
         else:
-            adapter = HTTPAdapter
+            adapter = HTTPAdapter()
 
         for scheme in ('http://', 'https://'):
             self.requests.mount(scheme, adapter)
